@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to 1999!</title>
+	<style>
+		body {
+			background-image: url('assets/bg.gif');
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.page-container {
+			width: 480px;
+			margin: 0 auto;
+		}
+		.tab-control {
+			text-align: center;
+		}
+		.tab-control-layer {
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div align="center">
+		<div class="page-container">
+			<div align="left">
+				<h1>Welcome to 1999!</h1>
+				<p>Today is Tuesday, June 4, 2024.</p>
+				<div class="tab-control">
+					<a href="#tab0" onclick="tabLinkClickHandler('tab0')">Link 1</a>
+					<a href="#tab1" onclick="tabLinkClickHandler('tab1')">Link 2</a>
+					<a href="#tab2" onclick="tabLinkClickHandler('tab2')">Link 3</a>
+				</div>
+				<div id="tab0">Content 1</div>
+				<div id="tab1" style="display: none;">Content 2</div>
+				<div id="tab2" style="display: none;">Content 3</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var tabLinks = document.getElementsByName('link');
+		var currentOpenTabElement = document.getElementById('tab0');
+
+		for (var i = 0; i < tabLinks.length; i++) {
+			tabLinks[i].attachEvent('onclick', createOnClickHandler(i));
+		}
+
+		function createOnClickHandler(tabLinkIndex) {
+			var tabLink = tabLinks[tabLinkIndex];
+			var tabId = tabLink.getAttribute('tab');
+
+			return function() {
+				openTab(tabId);
+			}
+		}
+
+		function openTab(tabId) {
+			var tab = document.getElementById(tabId);
+			currentOpenTabElement.style.display = 'none';
+			tab.style.display = '';
+			currentOpenTabElement = tab;
+		}
+	</script>
+</body>
+</html>
